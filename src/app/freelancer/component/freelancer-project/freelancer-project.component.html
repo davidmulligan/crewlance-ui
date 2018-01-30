@@ -1,0 +1,30 @@
+<h1>Projects</h1>
+<hr>
+<div class="input-group">
+	<input #query type="text" class="form-control mr-sm-2" placeholder="Search...">
+	<button class="btn btn-outline-primary" (click)="filter(query.value)"><i class="fa fa-search" aria-hidden="true"></i></button>
+</div>
+<hr>
+<div class="row">
+	<div class="col col-md-3">
+		<ng-container *ngFor="let project of projects">
+			<div class="card mb-1" (click)="selectProject(project)">
+				<div class="card-header">{{ project.title }}</div>
+				<div class="card-body">
+					<p class="card-text">
+						{{ project.location }} - {{ project.duration }} days<br>
+						{{ project.amount | currency: 'GBP' }}
+					</p>
+				</div>
+				<div class="card-footer">
+					<span class="badge badge-dark">New</span>
+					<small class="text-muted float-right">Posted 10 minutes ago</small>
+				</div>
+			</div> 
+		</ng-container>
+	</div>
+	<div class="col col-md-9">
+		<project-detail *ngIf="project" [project]="project"></project-detail>
+	</div>
+</div>
+        

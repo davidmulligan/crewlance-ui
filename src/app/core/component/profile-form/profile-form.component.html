@@ -1,0 +1,42 @@
+<h1>Profile</h1>
+<hr>
+<form #f="ngForm" (ngSubmit)="save(f.value)">
+   <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input #firstName="ngModel" [(ngModel)]="user.firstName" name="firstName" id="firstName" type="text" class="form-control" required>
+    <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">
+      First name is required.
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="lastName">Last Name</label>
+    <input #lastName="ngModel" [(ngModel)]="user.lastName" name="lastName" id="lastName" type="text" class="form-control" required>
+    <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">
+      Last name is required.
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input #email="ngModel" [(ngModel)]="user.email" name="email" id="email" type="text" class="form-control" required>
+    <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+      Email is required.
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="companyName">Company Name</label>
+    <input #companyName="ngModel" [(ngModel)]="user.companyName" name="companyName" id="companyName" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+      <label for="biography">Biography</label>
+      <textarea #biography="ngModel" [(ngModel)]="user.biography" name="biography" id="biography" class="form-control" rows="5"></textarea>  
+  </div>
+  <div class="form-group">
+    <label for="skills">Skills</label>
+    <select #skillsSelect="ngModel" [(ngModel)]="user.skills" multiple name="skills" id="skills" class="form-control" [compareWith]="compareById">
+      <option *ngFor="let skill of skills" [ngValue]="skill">
+        {{ skill.name }}
+      </option>
+    </select>
+  </div>   
+  <button [disabled]="!f.valid" class="btn btn-primary">Update</button>
+</form>

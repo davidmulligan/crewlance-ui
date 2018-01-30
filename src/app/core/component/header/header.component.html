@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+  <a class="navbar-brand" routerLink="/">Crewlance - Proof of Concept</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarToggle">
+    <ul class="navbar-nav ml-auto">
+      <li *ngIf="authService.isLoggedIn()" class="nav-item">
+        <a class="nav-link" routerLink="/"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a>
+      </li>
+      <li *ngIf="authService.isLoggedIn() && authService.currentUser.scopes.indexOf('ROLE_CLIENT') != -1" ngbDropdown placement="bottom-right" class="nav-item dropdown pointer">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdownClient" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;Client</a>
+        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownClient">
+          <a class="dropdown-item" routerLink="/client/projects"><i class="fa fa-fw fa-database" aria-hidden="true"></i>&nbsp;Projects</a>
+          <a class="dropdown-item" routerLink="/client/projects/add"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i>&nbsp;Add Project</a>
+        </div>
+      </li>
+      <li *ngIf="authService.isLoggedIn() && authService.currentUser.scopes.indexOf('ROLE_FREELANCER') != -1" ngbDropdown placement="bottom-right" class="nav-item dropdown pointer">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdownFreelancer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;Freelancer</a>
+        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownFreelancer">
+          <a class="dropdown-item" routerLink="/freelancer/projects"><i class="fa fa-fw fa-database" aria-hidden="true"></i>&nbsp;Projects</a>
+          <a class="dropdown-item" routerLink="/freelancer/bids"><i class="fa fa-fw fa-gavel" aria-hidden="true"></i>&nbsp;Bids</a>
+        </div>
+      </li>
+      <li *ngIf="authService.isLoggedIn() && authService.currentUser.scopes.indexOf('ROLE_ADMIN') != -1" ngbDropdown placement="bottom-right" class="nav-item dropdown pointer">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdownAdmin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;Admin</a>
+        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownAdmin">
+          <a class="dropdown-item" routerLink="/admin/projects"><i class="fa fa-th-list" aria-hidden="true"></i>&nbsp;Projects</a>
+          <a class="dropdown-item" routerLink="/admin/categories"><i class="fa fa-th-list" aria-hidden="true"></i>&nbsp;Categories</a>
+          <a class="dropdown-item" routerLink="/admin/skills"><i class="fa fa-th-list" aria-hidden="true"></i>&nbsp;Skills</a>
+          <a class="dropdown-item" routerLink="/admin/users"><i class="fa fa-th-list" aria-hidden="true"></i>&nbsp;Users</a>
+        </div>
+      </li>
+      <li *ngIf="authService.isLoggedIn()" ngbDropdown placement="bottom-right" class="nav-item dropdown pointer">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Account</a>
+        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownAccount">
+          <a class="dropdown-item" routerLink="/profile"><i class="fa  fa-fw fa-user-o" aria-hidden="true"></i>&nbsp;Profile</a>
+          <a class="dropdown-item" (click)="authService.logout()"><i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</a>
+        </div>
+      </li>
+      <li *ngIf="!authService.isLoggedIn()" class="nav-item">
+        <a class="nav-link" routerLink="/login"><i class="fa fa-fw fa-sign-in" aria-hidden="true"></i>&nbsp;Login</a>
+      </li>
+      <li *ngIf="!authService.isLoggedIn()" class="nav-item">
+          <a class="nav-link" routerLink="/register"><i class="fa fa-fw fa-user" aria-hidden="true"></i>&nbsp;Register</a>
+        </li>
+    </ul>
+  </div>
+</nav>

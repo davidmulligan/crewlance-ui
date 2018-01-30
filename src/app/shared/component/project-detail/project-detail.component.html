@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-header">
+        {{ project.title }}
+    </div>
+    <div class="card-body">
+        <p class="card-text">{{ project.description }}</p>
+    </div>
+    <div class="card-footer text-muted">
+        <button class="btn btn-sm btn-outline-primary float-right">Bid</button>
+        <small><strong>Location:</strong> {{ project.location }}</small> |
+        <small><strong>Rate:</strong> {{ project.amount | currency: 'GBP' }}</small> |
+        <small><strong>Duration:</strong> {{ project.duration }} days</small> |        
+        <small><strong>Client:</strong> {{ project.createdBy.companyName }}</small> |
+        <small><strong>Posted By:</strong> {{ project.createdBy.firstName }} {{ project.createdBy.lastName }}</small> |
+        <small><strong>Posted On:</strong> 31st December 2018</small> |
+        <small><strong>Category:</strong> {{ project.category.name }}</small> |
+    </div>
+</div>    

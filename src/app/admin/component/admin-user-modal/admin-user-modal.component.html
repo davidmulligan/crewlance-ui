@@ -1,0 +1,73 @@
+<div class="modal-header">
+    <h4 *ngIf="!isExistingObject()" class="modal-title">Create User</h4>
+    <h4 *ngIf="isExistingObject()" class="modal-title">Update User</h4>  
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close(false)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #f="ngForm" (ngSubmit)="save(f.value)">
+        <div *ngIf="!isExistingObject()" class="form-group">
+            <label for="username">Username</label>
+            <input #username="ngModel" [(ngModel)]="user.username" name="username" id="username" type="text" class="form-control" required>
+            <div class="alert alert-danger" *ngIf="username.touched && username.invalid">
+              Username is required.
+            </div>
+          </div>
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input #firstName="ngModel" [(ngModel)]="user.firstName" name="firstName" id="firstName" type="text" class="form-control" required>
+          <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">
+            First name is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input #lastName="ngModel" [(ngModel)]="user.lastName" name="lastName" id="lastName" type="text" class="form-control" required>
+          <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">
+            Last name is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input #email="ngModel" [(ngModel)]="user.email" name="email" id="email" type="text" class="form-control" required>
+          <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+            Email is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="companyName">Company Name</label>
+          <input #companyName="ngModel" [(ngModel)]="user.companyName" name="companyName" id="companyName" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="biography">Biography</label>
+            <textarea #biography="ngModel" [(ngModel)]="user.biography" name="biography" id="biography" class="form-control" rows="5"></textarea>  
+        </div>
+        <div class="form-group">
+          <label for="skills">Skills</label>
+          <select #skillsSelect="ngModel" [(ngModel)]="user.skills" multiple name="skills" id="skills" class="form-control" [compareWith]="compareById">
+            <option *ngFor="let skill of skills" [ngValue]="skill">
+              {{ skill.name }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+            <label for="roles">Roles</label>
+            <select #rolesSelect="ngModel" [(ngModel)]="user.roles" multiple name="roles" id="roles" class="form-control" [compareWith]="compareById">
+              <option *ngFor="let role of roles" [ngValue]="role">
+                {{ role.name }}
+              </option>
+            </select>
+          </div>    
+        <div class="form-check">
+            <label class="form-check-label">
+              <input [(ngModel)]="user.enabled" name="enabled" id="enabled" type="checkbox" class="form-check-input">Enabled
+            </label>
+        </div>  
+      </form>    
+  </div>
+  <div class="modal-footer">
+      <button [disabled]="!f.valid" type="button" class="btn btn-outline-primary" (click)="save(user)">Save</button>
+      <button *ngIf="isExistingObject()" type="button" class="btn btn-outline-danger" (click)="delete(user)">Delete</button>
+      <button type="button" class="btn btn-outline-warning" (click)="activeModal.close(false)">Cancel</button>  
+  </div>

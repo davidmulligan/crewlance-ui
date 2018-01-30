@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h4 *ngIf="!isExistingObject()" class="modal-title">Create Skill</h4>
+  <h4 *ngIf="isExistingObject()" class="modal-title">Update Skill</h4>  
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close(false)">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #f="ngForm" (ngSubmit)="save(f.value)">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input #name="ngModel" [(ngModel)]="skill.name" name="name" id="name" type="text" class="form-control" required>
+        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+          Name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input #description="ngModel" [(ngModel)]="skill.description" name="description" id="description" type="text" class="form-control" required>
+        <div class="alert alert-danger" *ngIf="description.touched && description.invalid">
+          Description is required.
+        </div>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input [(ngModel)]="skill.principal" name="principal" id="principal" type="checkbox" class="form-check-input">Principal
+        </label>
+      </div>
+      <div class="form-check">
+          <label class="form-check-label">
+            <input [(ngModel)]="skill.active" name="active" id="active" type="checkbox" class="form-check-input">Active
+          </label>
+      </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button [disabled]="!f.valid" type="button" class="btn btn-outline-primary" (click)="save(skill)">Save</button>
+    <button *ngIf="isExistingObject()" type="button" class="btn btn-outline-danger" (click)="delete(skill)">Delete</button>
+    <button type="button" class="btn btn-outline-warning" (click)="activeModal.close(false)">Cancel</button>
+</div>

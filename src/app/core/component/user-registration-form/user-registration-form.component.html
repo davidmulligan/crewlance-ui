@@ -1,0 +1,51 @@
+<h1>User Registration</h1>
+<hr>
+<form #f="ngForm" (ngSubmit)="save(f.value)">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input #username="ngModel" [(ngModel)]="user.username" name="username" id="username" type="text" class="form-control" required>
+    <div class="alert alert-danger" *ngIf="username.touched && username.invalid">
+      Username is required.
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input #password="ngModel" [(ngModel)]="user.password" name="password" id="password" type="text" class="form-control" required>
+    <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+      Password is required.
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="confirmPassword">Confirm Password</label>
+    <input #confirmPassword="ngModel" [(ngModel)]="user.confirmPassword" validateEqual="password" name="confirmPassword" id="confirmPassword" type="text" class="form-control" required>
+    <div class="alert alert-danger" *ngIf="confirmPassword.touched && confirmPassword.invalid">
+        Passwords did not match
+    </div>      
+  </div>
+   <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input #firstName="ngModel" [(ngModel)]="user.firstName" name="firstName" id="firstName" type="text" class="form-control" required>
+    <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">
+      First name is required.
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="lastName">Last Name</label>
+    <input #lastName="ngModel" [(ngModel)]="user.lastName" name="lastName" id="lastName" type="text" class="form-control" required>
+    <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">
+      Last name is required.
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input #email="ngModel" [(ngModel)]="user.email" name="email" id="email" type="text" class="form-control" required>
+    <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+      Email is required.
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="companyName">Company Name</label>
+    <input #companyName="ngModel" [(ngModel)]="user.companyName" name="companyName" id="companyName" type="text" class="form-control">
+  </div>
+  <button [disabled]="!f.valid" class="btn btn-primary">Update</button>
+</form>

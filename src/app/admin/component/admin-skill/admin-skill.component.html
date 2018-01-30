@@ -1,0 +1,26 @@
+<h1>Skills</h1>
+<hr>
+<div class="input-group">
+  <input #query (keyup)="filter(query.value)" type="text" class="form-control mr-sm-2" placeholder="Search...">
+  <button class="btn btn-outline-primary" (click)="openModal()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+</div>
+<ngx-datatable class="bootstrap" [rows]="filteredSkills" [loadingIndicator]="true" [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="40" [limit]="10" [rowHeight]="'auto'" [reorderable]="reorderable">
+  <ngx-datatable-column prop="name" name="Name" [sortable]="true" [resizeable]="true" [flexGrow]="2"></ngx-datatable-column>
+  <ngx-datatable-column prop="principal" name="Principal" [sortable]="true" [resizeable]="true" [flexGrow]="1">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+          <i *ngIf="value" class="fa fa-check-circle-o" aria-hidden="true"></i>
+          <i *ngIf="!value" class="fa fa-circle-o" aria-hidden="true"></i>
+      </ng-template>
+  </ngx-datatable-column>        
+  <ngx-datatable-column prop="active" name="Active" [sortable]="true" [resizeable]="true" [flexGrow]="1">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+          <i *ngIf="value" class="fa fa-check-circle-o" aria-hidden="true"></i>
+          <i *ngIf="!value" class="fa fa-circle-o" aria-hidden="true"></i>
+      </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column prop="id" name="" cellClass="text-center" [sortable]="true" [resizeable]="true" [flexGrow]="1">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+          <button class="btn btn-sm btn-outline-primary" (click)="openModal(value)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+      </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

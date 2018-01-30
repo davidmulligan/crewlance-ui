@@ -1,0 +1,22 @@
+<h1>Projects</h1>
+<hr>
+<div class="input-group">
+  <input #query type="text" class="form-control mr-sm-2" placeholder="Search...">
+  <button class="btn btn-outline-primary" (click)="filter(query.value)"><i class="fa fa-search" aria-hidden="true"></i></button>
+</div>
+<ngx-datatable class="bootstrap" [rows]="projects" [loadingIndicator]="true" [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="40" [limit]="10" [rowHeight]="'auto'" [reorderable]="reorderable">
+  <ngx-datatable-column prop="title" name="Title" [sortable]="true" [resizeable]="true" [flexGrow]="2"></ngx-datatable-column>
+  <ngx-datatable-column prop="description" name="Description" [sortable]="true" [resizeable]="true" [flexGrow]="3">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+          {{ value | truncate : 100 : " ..." }}
+      </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column prop="amount" name="Amount" [sortable]="true" [resizeable]="true" [flexGrow]="1">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+          {{ value | currency: 'GBP' }}
+      </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column prop="duration" name="Duration" [sortable]="true" [resizeable]="true" [flexGrow]="1"></ngx-datatable-column>
+  <ngx-datatable-column prop="location" name="Location" [sortable]="true" [resizeable]="true" [flexGrow]="1"></ngx-datatable-column>
+  <ngx-datatable-column prop="category.name" name="Category" [sortable]="true" [resizeable]="true" [flexGrow]="1"></ngx-datatable-column>
+</ngx-datatable>
